@@ -19,9 +19,16 @@ public class Main {
 
 
         printBoard();
+        System.out.println("IMPORTANT RULE:");
+        System.out.println("When entering a slot number, DO NOT enter in a SPECIAL CHARACTERS or LETTERS! It will result in an AUTOMATIC LOSS!");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("X's will play first. Enter a slot number to place X in:");
 
         while (winner == null) {
+            while(!input.hasNextInt()){
+                input.next();
+                System.out.println("Invalid input; re-enter slot number:");
+            }
             int numInput;
             try {
                 numInput = input.nextInt();
@@ -30,8 +37,8 @@ public class Main {
                     continue;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input; re-enter slot number:");
-                continue;
+                System.out.println("Invalid input! " + turn + "'s have lost.");
+                break;
             }
             if (board[numInput-1].equals(String.valueOf(numInput))) {
                 board[numInput-1] = turn;
@@ -115,5 +122,4 @@ public class Main {
         for (int a = 0; a < 9; a++) {
             board[a] = String.valueOf(a+1);
         }
-    }
 }
